@@ -92,9 +92,15 @@ export default function ProfilePage() {
     });
   };
 
-  // Check authentication after all hooks
+  // Check authentication with useEffect to avoid render-time side effects
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  }, [isAuthenticated, router]);
+
+  // Show nothing while redirecting
   if (!isAuthenticated) {
-    router.push("/login");
     return null;
   }
 
