@@ -14,14 +14,23 @@ export default function WishlistPage() {
   const { isAuthenticated } = useAuthStore();
   const { items, setWishlist } = useWishlistStore();
   const [loading, setLoading] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+
+  // Wait for client-side hydration before checking auth
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
+    // Only check authentication after client-side hydration
+    if (!isClient) return;
+    
     if (!isAuthenticated) {
       router.push("/login?redirect=/wishlist");
       return;
     }
     fetchWishlist();
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, router, isClient]);
 
   const fetchWishlist = async () => {
     try {

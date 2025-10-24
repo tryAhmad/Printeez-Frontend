@@ -114,14 +114,23 @@ export default function OrdersPage() {
   const { isAuthenticated } = useAuthStore();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+
+  // Wait for client-side hydration before checking auth
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
+    // Only check authentication after client-side hydration
+    if (!isClient) return;
+    
     if (!isAuthenticated) {
       router.push("/login?redirect=/orders");
       return;
     }
     fetchOrders();
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, router, isClient]);
 
   const fetchOrders = async () => {
     try {
