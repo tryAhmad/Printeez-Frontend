@@ -64,7 +64,7 @@ export default function ProductCard({
   return (
     <Link href={`/products/${product._id}`} className="group">
       <div className="card overflow-hidden h-full">
-        <div className="relative aspect-square overflow-hidden bg-gray-100">
+        <div className="relative aspect-square overflow-hidden bg-white">
           {showNewBadge && (
             <span className="absolute top-3 left-3 z-10 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">
               NEW
