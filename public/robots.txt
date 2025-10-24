@@ -1,0 +1,16 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow admin pages
+Disallow: /admin/
+Disallow: /api/
+
+# Allow product pages
+Allow: /products/
+Allow: /about
+Allow: /contact
+Allow: /faq
+
+# Sitemap
+Sitemap: https://printeez.studio/sitemap.xml

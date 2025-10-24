@@ -3,19 +3,12 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { generateMetadata as generateSEO } from "@/config/seo";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "Printeez - Premium T-Shirt Store",
-  description:
-    "Shop the best collection of printed t-shirts - Urban, Typography, Abstract & Anime designs",
-  icons: {
-    icon: [{ url: "/logo.jpg?v=3", sizes: "any", type: "image/jpeg" }],
-    apple: [{ url: "/logo.jpg?v=3", sizes: "180x180", type: "image/jpeg" }],
-    shortcut: "/logo.jpg?v=3",
-  },
-};
+// Enhanced SEO metadata
+export const metadata = generateSEO({});
 
 export default function RootLayout({
   children,
@@ -25,9 +18,51 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/logo.jpg?v=3" type="image/jpeg" />
-        <link rel="apple-touch-icon" href="/logo.jpg?v=3" />
-        <link rel="shortcut icon" href="/logo.jpg?v=3" />
+        {/* Structured Data for Organization */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Printeez",
+              description: "Premium Custom T-Shirt Store",
+              url: "https://printeez.studio",
+              logo: "https://printeez.studio/logo.jpg",
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+1-XXX-XXX-XXXX",
+                contactType: "Customer Service",
+                areaServed: "Worldwide",
+                availableLanguage: "English",
+              },
+              sameAs: [
+                "https://facebook.com/printeez",
+                "https://twitter.com/printeez",
+                "https://instagram.com/printeez",
+              ],
+            }),
+          }}
+        />
+
+        {/* Structured Data for Website */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Printeez",
+              url: "https://printeez.studio",
+              potentialAction: {
+                "@type": "SearchAction",
+                target:
+                  "https://printeez.studio/products?search={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
       </head>
       <body className={inter.className}>
         <Navbar />
