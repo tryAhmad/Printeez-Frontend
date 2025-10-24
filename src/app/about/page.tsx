@@ -42,17 +42,17 @@ export default function AboutPage() {
               </p>
 
               <p className="text-gray-700 leading-relaxed mb-6">
-                We believe that clothing is more than just fabric—it&apos;s a canvas
-                for self-expression. Every design we create tells a story,
-                whether it&apos;s inspired by urban street culture, clean typography,
-                abstract art, or vibrant anime aesthetics.
+                We believe that clothing is more than just fabric—it&apos;s a
+                canvas for self-expression. Every design we create tells a
+                story, whether it&apos;s inspired by urban street culture, clean
+                typography, abstract art, or vibrant anime aesthetics.
               </p>
 
               <p className="text-gray-700 leading-relaxed">
                 Our commitment to quality means we use only premium materials
                 and printing techniques to ensure that your t-shirt not only
-                looks great but stands the test of time. We&apos;re not just selling
-                t-shirts; we&apos;re helping you express who you are.
+                looks great but stands the test of time. We&apos;re not just
+                selling t-shirts; we&apos;re helping you express who you are.
               </p>
             </div>
           </div>

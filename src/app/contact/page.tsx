@@ -51,8 +51,8 @@ export default function ContactPage() {
               Get In Touch
             </h1>
             <p className="text-xl text-primary-100">
-              Have questions or feedback? We&apos;d love to hear from you. Send us a
-              message and we&apos;ll respond as soon as possible.
+              Have questions or feedback? We&apos;d love to hear from you. Send
+              us a message and we&apos;ll respond as soon as possible.
             </p>
           </div>
         </div>
@@ -68,7 +68,9 @@ export default function ContactPage() {
                 <Mail className="w-8 h-8 text-primary-600" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">Email Us</h3>
-              <p className="text-gray-600 text-sm mb-2">We&apos;re here to help</p>
+              <p className="text-gray-600 text-sm mb-2">
+                We&apos;re here to help
+              </p>
               <a
                 href="mailto:support@printeez.com"
                 className="text-primary-600 hover:text-primary-700 font-medium"
@@ -118,8 +120,8 @@ export default function ContactPage() {
 
                 {submitStatus === "success" && (
                   <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
-                    Thank you! Your message has been sent successfully. We&apos;ll
-                    get back to you soon.
+                    Thank you! Your message has been sent successfully.
+                    We&apos;ll get back to you soon.
                   </div>
                 )}
 
