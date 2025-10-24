@@ -23,7 +23,11 @@ export default function ProductDetailPage() {
   const params = useParams();
   const router = useRouter();
   const { isAuthenticated } = useAuthStore();
-  const { isInWishlist, addItem: addToWishlistStore, removeItem: removeFromWishlistStore } = useWishlistStore();
+  const {
+    isInWishlist,
+    addItem: addToWishlistStore,
+    removeItem: removeFromWishlistStore,
+  } = useWishlistStore();
   const [product, setProduct] = useState<Product | null>(null);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -139,7 +143,7 @@ export default function ProductDetailPage() {
 
     try {
       const inWishlist = isInWishlist(product._id);
-      
+
       if (inWishlist) {
         await wishlistAPI.removeFromWishlist(product._id);
         removeFromWishlistStore(product._id);
@@ -151,14 +155,15 @@ export default function ProductDetailPage() {
       }
     } catch (error: any) {
       console.error("Wishlist error:", error);
-      
+
       if (error.response?.status === 401) {
         toast.error("Please login to manage wishlist");
         router.push("/login");
         return;
       }
-      
-      const errorMsg = error.response?.data?.error || "Failed to update wishlist";
+
+      const errorMsg =
+        error.response?.data?.error || "Failed to update wishlist";
       toast.error(errorMsg);
     }
   };
@@ -369,7 +374,7 @@ export default function ProductDetailPage() {
                   ? "Out of Stock"
                   : "Add to Cart"}
               </button>
-              <button 
+              <button
                 onClick={handleWishlistToggle}
                 className={`px-6 py-4 border-2 rounded-lg transition-colors ${
                   isInWishlist(product._id)
@@ -377,8 +382,10 @@ export default function ProductDetailPage() {
                     : "border-gray-300 hover:border-red-500 hover:text-red-500"
                 }`}
               >
-                <Heart 
-                  className={`w-6 h-6 ${isInWishlist(product._id) ? "fill-red-500" : ""}`}
+                <Heart
+                  className={`w-6 h-6 ${
+                    isInWishlist(product._id) ? "fill-red-500" : ""
+                  }`}
                 />
               </button>
             </div>
