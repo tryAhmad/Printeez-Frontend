@@ -108,8 +108,9 @@ export default function AboutPage() {
                 Customer Focus
               </h3>
               <p className="text-gray-600 text-center">
-                Your satisfaction is our priority. We&apos;re dedicated to providing
-                exceptional service and ensuring you love every purchase.
+                Your satisfaction is our priority. We&apos;re dedicated to
+                providing exceptional service and ensuring you love every
+                purchase.
               </p>
             </div>
           </div>
