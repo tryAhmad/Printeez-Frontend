@@ -24,7 +24,7 @@ export default function WishlistPage() {
   useEffect(() => {
     // Only check authentication after client-side hydration
     if (!isClient) return;
-    
+
     if (!isAuthenticated) {
       router.push("/login?redirect=/wishlist");
       return;

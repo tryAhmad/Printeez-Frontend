@@ -124,7 +124,7 @@ export default function OrdersPage() {
   useEffect(() => {
     // Only check authentication after client-side hydration
     if (!isClient) return;
-    
+
     if (!isAuthenticated) {
       router.push("/login?redirect=/orders");
       return;
