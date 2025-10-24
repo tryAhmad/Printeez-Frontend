@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { productAPI, cartAPI } from "@/lib/api";
+import { productAPI, cartAPI, wishlistAPI } from "@/lib/api";
 import {
   ShoppingCart,
   Heart,
@@ -14,6 +14,7 @@ import {
 import ProductCard from "@/components/products/ProductCard";
 import toast from "react-hot-toast";
 import { useCartStore } from "@/store/cartStore";
+import { useWishlistStore } from "@/store/wishlistStore";
 import { useAuthStore } from "@/store/authStore";
 import Link from "next/link";
 import { Product } from "@/types";
@@ -22,6 +23,7 @@ export default function ProductDetailPage() {
   const params = useParams();
   const router = useRouter();
   const { isAuthenticated } = useAuthStore();
+  const { isInWishlist, addItem: addToWishlistStore, removeItem: removeFromWishlistStore } = useWishlistStore();
   const [product, setProduct] = useState<Product | null>(null);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -122,6 +124,41 @@ export default function ProductDetailPage() {
       const errorMsg =
         error.response?.data?.error ||
         "Failed to add item to cart. Please try again.";
+      toast.error(errorMsg);
+    }
+  };
+
+  const handleWishlistToggle = async () => {
+    if (!product) return;
+
+    if (!isAuthenticated) {
+      toast.error("Please login to add items to wishlist");
+      router.push("/login");
+      return;
+    }
+
+    try {
+      const inWishlist = isInWishlist(product._id);
+      
+      if (inWishlist) {
+        await wishlistAPI.removeFromWishlist(product._id);
+        removeFromWishlistStore(product._id);
+        toast.success("Removed from wishlist");
+      } else {
+        await wishlistAPI.addToWishlist(product._id);
+        addToWishlistStore(product);
+        toast.success("Added to wishlist!");
+      }
+    } catch (error: any) {
+      console.error("Wishlist error:", error);
+      
+      if (error.response?.status === 401) {
+        toast.error("Please login to manage wishlist");
+        router.push("/login");
+        return;
+      }
+      
+      const errorMsg = error.response?.data?.error || "Failed to update wishlist";
       toast.error(errorMsg);
     }
   };
@@ -332,8 +369,17 @@ export default function ProductDetailPage() {
                   ? "Out of Stock"
                   : "Add to Cart"}
               </button>
-              <button className="px-6 py-4 border-2 border-gray-300 rounded-lg hover:border-red-500 hover:text-red-500 transition-colors">
-                <Heart className="w-6 h-6" />
+              <button 
+                onClick={handleWishlistToggle}
+                className={`px-6 py-4 border-2 rounded-lg transition-colors ${
+                  isInWishlist(product._id)
+                    ? "border-red-500 bg-red-50 text-red-500"
+                    : "border-gray-300 hover:border-red-500 hover:text-red-500"
+                }`}
+              >
+                <Heart 
+                  className={`w-6 h-6 ${isInWishlist(product._id) ? "fill-red-500" : ""}`}
+                />
               </button>
             </div>
 
