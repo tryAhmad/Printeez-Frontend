@@ -214,7 +214,7 @@ export default function ProductDetailPage() {
                 "https://via.placeholder.com/800x800?text=No+Image"
               }
               alt={product.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
             {product.sizes.every((s) => s.stock === 0) && (
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
