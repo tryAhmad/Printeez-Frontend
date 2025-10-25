@@ -33,8 +33,9 @@ export default function ProductCard({
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
-    // Just navigate to product detail page to select size
-    window.location.href = `/products/${product._id}`;
+    // Use slug if available, otherwise use ID
+    const productUrl = product.slug || product._id;
+    window.location.href = `/products/${productUrl}`;
   };
 
   const handleWishlistToggle = async (e: React.MouseEvent) => {
@@ -62,7 +63,7 @@ export default function ProductCard({
   };
 
   return (
-    <Link href={`/products/${product._id}`} className="group">
+    <Link href={`/products/${product.slug || product._id}`} className="group">
       <div className="card overflow-hidden h-full">
         <div className="relative aspect-square overflow-hidden bg-white">
           {showNewBadge && (
