@@ -207,7 +207,7 @@ export default function ProductDetailPage() {
         {/* Product Details */}
         <div className="grid md:grid-cols-2 gap-12 mb-20">
           {/* Image */}
-          <div className="relative aspect-square rounded-2xl overflow-hidden bg-gray-100">
+          <div className="relative aspect-square rounded-2xl overflow-hidden bg-white border-2 border-gray-200">
             <img
               src={
                 product.imageUrl ||
