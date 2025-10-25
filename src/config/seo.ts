@@ -116,9 +116,12 @@ export function generateMetadata({
 
     // Icons
     icons: {
-      icon: [{ url: "/logo.jpg?v=3", sizes: "any", type: "image/jpeg" }],
-      apple: [{ url: "/logo.jpg?v=3", sizes: "180x180", type: "image/jpeg" }],
-      shortcut: "/logo.jpg?v=3",
+      icon: [
+        { url: "/logo.ico", sizes: "any", type: "image/x-icon" },
+        { url: "/logo.jpg", sizes: "512x512", type: "image/jpeg" },
+      ],
+      apple: [{ url: "/logo.jpg", sizes: "180x180", type: "image/jpeg" }],
+      shortcut: "/logo.ico",
     },
 
     // Manifest
