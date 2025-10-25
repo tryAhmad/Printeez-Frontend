@@ -63,18 +63,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Fetch dynamic product pages
   let productPages: MetadataRoute.Sitemap = [];
-  
+
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://printeez-backend.vercel.app/api";
+    const apiUrl =
+      process.env.NEXT_PUBLIC_API_URL ||
+      "https://printeez-backend.vercel.app/api";
     const response = await fetch(`${apiUrl}/products`, {
-      next: { revalidate: 3600 } // Revalidate every hour
+      next: { revalidate: 3600 }, // Revalidate every hour
     });
-    
+
     if (response.ok) {
       const products = await response.json();
       productPages = products.map((product: any) => ({
         url: `${baseUrl}/products/${product._id}`,
-        lastModified: new Date(product.updatedAt || product.createdAt || new Date()),
+        lastModified: new Date(
+          product.updatedAt || product.createdAt || new Date()
+        ),
         changeFrequency: "weekly" as const,
         priority: 0.8,
       }));
