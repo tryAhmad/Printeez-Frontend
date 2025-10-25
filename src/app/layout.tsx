@@ -26,15 +26,24 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Printeez",
-              description: "Premium Custom T-Shirt Store",
-              url: "https://printeez.studio",
-              logo: "https://printeez.studio/logo.jpg",
+              description:
+                "Premium Custom T-Shirt Store - Unique Designs, Quality Prints",
+              url:
+                process.env.NEXT_PUBLIC_SITE_URL || "https://printeez.studio",
+              logo: {
+                "@type": "ImageObject",
+                url: `${
+                  process.env.NEXT_PUBLIC_SITE_URL || "https://printeez.studio"
+                }/logo.jpg`,
+                width: 600,
+                height: 600,
+              },
               contactPoint: {
                 "@type": "ContactPoint",
-                telephone: "+1-XXX-XXX-XXXX",
+                telephone: "+92-XXX-XXXXXXX",
                 contactType: "Customer Service",
-                areaServed: "Worldwide",
-                availableLanguage: "English",
+                areaServed: "PK",
+                availableLanguage: ["English", "Urdu"],
               },
               sameAs: [
                 "https://facebook.com/printeez",
@@ -53,11 +62,20 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "Printeez",
-              url: "https://printeez.studio",
+              alternateName: "Printeez Studio",
+              url:
+                process.env.NEXT_PUBLIC_SITE_URL || "https://printeez.studio",
+              description:
+                "Shop unique custom-designed t-shirts with urban, typography, abstract, and anime styles",
               potentialAction: {
                 "@type": "SearchAction",
-                target:
-                  "https://printeez.studio/products?search={search_term_string}",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate: `${
+                    process.env.NEXT_PUBLIC_SITE_URL ||
+                    "https://printeez.studio"
+                  }/products?search={search_term_string}`,
+                },
                 "query-input": "required name=search_term_string",
               },
             }),
