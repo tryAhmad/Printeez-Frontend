@@ -45,7 +45,10 @@ export default function ProductStructuredData({
       product.averageRating && product.totalRatings
         ? {
             "@type": "AggregateRating",
-            ratingValue: product.averageRating.toFixed(1),
+            ratingValue:
+              typeof product.averageRating === "number"
+                ? product.averageRating.toFixed(1)
+                : product.averageRating,
             reviewCount: product.totalRatings,
             bestRating: "5",
             worstRating: "1",
