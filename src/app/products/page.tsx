@@ -227,7 +227,7 @@ function ProductsContent() {
                 <input
                   type="range"
                   min="0"
-                  max="100"
+                  max="10000"
                   value={priceRange[1]}
                   onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
                   className="w-full"
