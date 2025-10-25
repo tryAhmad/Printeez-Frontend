@@ -12,6 +12,7 @@ import {
   Star,
 } from "lucide-react";
 import ProductCard from "@/components/products/ProductCard";
+import ProductStructuredData from "@/components/seo/ProductStructuredData";
 import toast from "react-hot-toast";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
@@ -190,6 +191,9 @@ export default function ProductDetailPage() {
 
   return (
     <div>
+      {/* SEO Structured Data */}
+      <ProductStructuredData product={product} />
+
       <div className="container mx-auto px-4 py-12">
         {/* Back Button */}
         <Link

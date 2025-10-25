@@ -25,8 +25,8 @@ export default function ProductStructuredData({
     },
     offers: {
       "@type": "Offer",
-      url: `${baseUrl}/products/${product._id}`,
-      priceCurrency: "USD",
+      url: `${baseUrl}/products/${product.slug || product._id}`,
+      priceCurrency: "PKR",
       price: product.price,
       priceValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
         .toISOString()
