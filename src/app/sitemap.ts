@@ -1,10 +1,10 @@
 import { MetadataRoute } from "next";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://printeez.studio";
 
   // Static pages with their priorities and change frequencies
-  const staticPages = [
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -35,17 +35,54 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     },
+    {
+      url: `${baseUrl}/cart`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/wishlist`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/login`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.4,
+    },
+    {
+      url: `${baseUrl}/signup`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.4,
+    },
   ];
 
-  // TODO: In production, fetch actual product IDs from your API
-  // For now, returning static pages only
-  // You can add dynamic product URLs like this:
-  // const productPages = products.map((product) => ({
-  //   url: `${baseUrl}/products/${product._id}`,
-  //   lastModified: new Date(product.updatedAt),
-  //   changeFrequency: 'weekly' as const,
-  //   priority: 0.8,
-  // }));
+  // Fetch dynamic product pages
+  let productPages: MetadataRoute.Sitemap = [];
+  
+  try {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://printeez-backend.vercel.app/api";
+    const response = await fetch(`${apiUrl}/products`, {
+      next: { revalidate: 3600 } // Revalidate every hour
+    });
+    
+    if (response.ok) {
+      const products = await response.json();
+      productPages = products.map((product: any) => ({
+        url: `${baseUrl}/products/${product._id}`,
+        lastModified: new Date(product.updatedAt || product.createdAt || new Date()),
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      }));
+    }
+  } catch (error) {
+    console.error("Failed to fetch products for sitemap:", error);
+    // If API fails, continue with static pages only
+  }
 
-  return staticPages;
+  return [...staticPages, ...productPages];
 }
