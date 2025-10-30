@@ -290,6 +290,7 @@ export default function OrdersPage() {
                               <img
                                 src={productImage || "/placeholder.png"}
                                 alt={productName}
+                                loading="lazy"
                                 className="w-16 h-16 object-cover rounded-lg border"
                               />
 

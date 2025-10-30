@@ -214,6 +214,7 @@ export default function ProductDetailPage() {
                 "https://via.placeholder.com/800x800?text=No+Image"
               }
               alt={product.name}
+              loading="lazy"
               className="w-full h-full object-contain"
             />
             {product.sizes.every((s) => s.stock === 0) && (

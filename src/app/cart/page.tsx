@@ -169,6 +169,7 @@ export default function CartPage() {
                           "https://via.placeholder.com/150"
                         }
                         alt={item.productId.name}
+                        loading="lazy"
                         className="w-24 h-24 object-cover rounded-lg"
                       />
                     </Link>

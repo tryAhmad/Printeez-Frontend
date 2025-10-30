@@ -67,6 +67,8 @@ export default function Navbar() {
             <img
               src="/logo.jpg"
               alt="Printeez Logo"
+              loading="eager"
+              fetchPriority="high"
               className="h-12 w-12 object-contain transform group-hover:scale-110 transition-transform rounded-lg"
             />
             <span className="hidden sm:inline text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">

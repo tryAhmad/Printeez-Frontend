@@ -275,6 +275,7 @@ export default function CheckoutPage() {
                         "https://via.placeholder.com/60"
                       }
                       alt={item.productId.name}
+                      loading="lazy"
                       className="w-16 h-16 object-cover rounded"
                     />
                     <div className="flex-1">
