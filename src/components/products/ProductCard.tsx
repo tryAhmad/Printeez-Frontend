@@ -13,11 +13,13 @@ import { Product } from "@/types";
 interface ProductCardProps {
   product: Product;
   showNewBadge?: boolean;
+  priority?: boolean; // For LCP optimization
 }
 
 export default function ProductCard({
   product,
   showNewBadge = false,
+  priority = false,
 }: ProductCardProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { isAuthenticated } = useAuthStore();
@@ -84,13 +86,14 @@ export default function ProductCard({
               "https://via.placeholder.com/400x400?text=No+Image"
             }
             alt={product.name}
-            loading="lazy"
-            className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : undefined}
+            className="w-full h-full object-contain will-change-transform group-hover:scale-110 transition-transform duration-500"
           />
 
           {/* Overlay Buttons */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-end justify-center p-4 opacity-0 group-hover:opacity-100">
-            <div className="flex gap-2 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform">
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-end justify-center p-4 opacity-0 group-hover:opacity-100 will-change-opacity">
+            <div className="flex gap-2 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform will-change-transform">
               <button
                 onClick={handleAddToCart}
                 disabled={totalStock === 0}

@@ -118,7 +118,7 @@ export default function TopSelling() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
             >
-              <ProductCard product={product} />
+              <ProductCard product={product} priority={index < 4} />
             </motion.div>
           ))}
         </div>
